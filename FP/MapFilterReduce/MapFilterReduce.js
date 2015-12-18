@@ -34,18 +34,18 @@ console.log(newItems);
 
 
  var mfrItems = [ createItem(2),
-               createItem(4),
-               createItem(6),
-               createItem(1),
-               createItem(3)
-             ];
+                  createItem(4),
+                  createItem(6),
+                  createItem(1),
+                  createItem(3)
+                ];
 
- var finishedItems = mfrItems.map(function(item) {
-   return item.value * 2;
+ var finishedItems = mfrItems.reduce(function(prev, item) {
+   return prev.concat([item.value])
+ },[]).map(function(value) {
+   return value * 2;
  }).filter(function(value) {
    return value < 6;
- }).reduce(function(prev, value) {
-   return prev.concat([value]);
- }, []).reverse();
+ }).reverse();
 
  console.log(finishedItems);

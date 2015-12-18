@@ -23,3 +23,4 @@ var useFilter = list.filter(function(item) {
 });
 
 console.log(useFilter);
+console.log(list);

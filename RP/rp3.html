@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RP Example</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.7.83/Bacon.js" /></script>
+
+  </head>
+  <body>
+
+
+    <input id="inputText" type="text">
+      Enter list item:
+    </input>
+    <button id="inputBtn" type="button"> Enter </button>
+    <button id="removeBtn" type="button"> Remove </button>
+
+    <div id="list">
+    </div>
+
+    <script>
+
+    var formatAndClear = function(text) {
+      $('#inputText').val('');
+     return '<div>' + text + ' </div>';
+    }
+
+    var getText = function() {
+      return $('#inputText').val();
+    }
+
+    var remove = function() { return 'remove'};
+
+    var concatOrDrop = function(prev, curr) {
+        if (curr === 'remove') {
+          return prev.slice(0, prev.length -1);
+        }
+       return prev.concat([curr])
+    }
+
+    var removes = $('#removeBtn').asEventStream('click');
+    var adds = $('#inputBtn').asEventStream('click')
+                             .map(getText)
+                             .map(formatAndClear)
+                             .merge(removes.map(remove))
+                             .scan([], concatOrDrop);
+
+    adds.assign($("#list"), 'html');
+
+    </script>
+  </body>
+</html>

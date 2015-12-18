@@ -5,7 +5,6 @@ var bad = function(toAdd) {
   return time + toAdd;
 }
 
-
 //Impure!
 var alsoBad = function(toAdd) {
 
@@ -14,7 +13,14 @@ var alsoBad = function(toAdd) {
 
 }
 
+//Internal state, but doesn't expose implementation so less portable
+var better = function(toAdd) {
+
+   var time = 1;
+   return time + toAdd
+}
+
 //Pure...easy to test and has an "honest" API
-var great = function(time, toAdd) {
+var best = function(time, toAdd) {
   return time + toAdd;
 }

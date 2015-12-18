@@ -57,15 +57,15 @@ console.log(outside);
              ];
 
 
- var extractObj = function(item) {
+ var extractVal = function(item) {
    return { value: item.value + item.value2};
  };
 
- var doubleObj = function(item) {
+ var doubleVal = function(item) {
    return {value: item.value * 2};
  };
 
- var objToArray = function(prev, curr) {
+ var ValToArray = function(prev, curr) {
    return prev.concat([curr.value]);
  };
 
@@ -73,9 +73,9 @@ console.log(outside);
    return value < 8;
  };
 
- var finished = mfrItems.map(extractObj)
-                        .map(doubleObj)
-                        .reduce(objToArray, [])
+ var finished = mfrItems.map(extractVal)
+                        .map(doubleVal)
+                        .reduce(ValToArray, [])
                         .filter(filter8)
                         .reverse();
 

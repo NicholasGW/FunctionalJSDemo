@@ -19,7 +19,7 @@ var sayMyName = function(name) {
 }
 
 
-var say = sayMyName("Nick");
+var sayNick = sayMyName("Nick");
 
-say();
+sayNick();
 //-> Nick

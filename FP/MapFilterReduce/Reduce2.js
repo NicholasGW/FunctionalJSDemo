@@ -38,15 +38,11 @@ console.log(sorted.need);
 
 var sortedByReduce = reduceItems.reduce(function(prev, item) {
 
+    var toReturn = prev;
 
-    /* var mergeIn = {};
-     * var addedVal = prev[item.type].concat[item.value]
-     * mergeIn[item.type] = addedVal */
-     
-    var mergeIn = {[item.type]: prev[item.type].concat([item.value])};
+    toReturn[item.type] = toReturn[item.type].concat([item.value]);
 
-    return Object.assign({}, prev, mergeIn);
-
+    return toReturn;
 
 }, { need: [], remove: [] });
 
