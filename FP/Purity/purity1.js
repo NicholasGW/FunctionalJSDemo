@@ -1,14 +1,22 @@
-//Relies on Global State
+//Bad - elies on Global State
 var time = Date.now();
 
 var bad = function(toAdd) {
   return time + toAdd;
 }
 
-//Impure!
+//Impure
 var alsoBad = function(toAdd) {
 
   var time = Date.now();
+  return time + toAdd;
+
+}
+
+//Evil! (Side Effects)
+var evil = function(toAdd) {
+
+  localStorage.test = toAdd;
   return time + toAdd;
 
 }
@@ -18,6 +26,7 @@ var better = function(toAdd) {
 
    var time = 1;
    return time + toAdd
+   
 }
 
 //Pure...easy to test and has an "honest" API

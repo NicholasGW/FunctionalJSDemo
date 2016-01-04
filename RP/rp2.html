@@ -25,10 +25,16 @@
     var up = $('#Up').asEventStream('click');
     var down = $('#Down').asEventStream('click');
 
-    var counter = up.map(1)
-                    .merge(down.map(-1))
-                    .scan(0, function(x,y) { return x + y}).log();
+    var upCount = up.map(1);
+    var downCount = down.map(-1);
 
+    var summer = function(x,y) {
+      return x + y
+    };
+
+    var counter = upCount.merge(downCount)
+                         .scan(0, summer);
+                         
      counter.assign($('#counter'), 'text');
 
     </script>

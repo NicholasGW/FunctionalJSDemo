@@ -6,7 +6,7 @@ var multiply = function(x, mult) {
 console.log(multiply(2,3));
 
 
-var createMult = function(mult) {
+var createMultiplier = function(mult) {
 
   return function(x) {
     return x * mult;
@@ -14,6 +14,6 @@ var createMult = function(mult) {
 }
 
 
-var mult3 = createMult(3);
+var mult3 = createMultiplier(3);
 
 console.log(mult3(2));

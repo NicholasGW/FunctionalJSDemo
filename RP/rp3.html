@@ -13,7 +13,7 @@
     <input id="inputText" type="text">
       Enter list item:
     </input>
-    <button id="inputBtn" type="button"> Enter </button>
+    <button id="inputBtn" type="button"> Add </button>
     <button id="removeBtn" type="button"> Remove </button>
 
     <div id="list">
@@ -21,16 +21,17 @@
 
     <script>
 
-    var formatAndClear = function(text) {
-      $('#inputText').val('');
+    var format = function(text) {
      return '<div>' + text + ' </div>';
     }
 
-    var getText = function() {
-      return $('#inputText').val();
+    var clearField = function() {
+      $('#inputText').val('');
     }
 
-    var remove = function() { return 'remove'};
+    var returnValueFromEvent = function(event) {
+      return event.target.value;
+    }
 
     var concatOrDrop = function(prev, curr) {
         if (curr === 'remove') {
@@ -39,14 +40,22 @@
        return prev.concat([curr])
     }
 
-    var removes = $('#removeBtn').asEventStream('click');
-    var adds = $('#inputBtn').asEventStream('click')
-                             .map(getText)
-                             .map(formatAndClear)
-                             .merge(removes.map(remove))
-                             .scan([], concatOrDrop);
+    var textBox = $('#inputText').asEventStream('change')
+                                 .map(returnValueFromEvent)
+                                 .toProperty("");
 
-    adds.assign($("#list"), 'html');
+    var removeClicks = $('#removeBtn').asEventStream('click')
+                                      .map('remove');
+
+    var addClicks = $('#inputBtn').asEventStream('click')
+                                  .map(textBox)
+                                  .map(format)
+
+    var list = addClicks.merge(removeClicks)
+                        .scan([], concatOrDrop)
+
+    list.onValue(clearField);
+    list.assign($("#list"), 'html');
 
     </script>
   </body>

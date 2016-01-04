@@ -19,7 +19,9 @@ var summer = function(sum, curr) {
 
 
 var doItAll = function(arr) {
-  console.log(arr.map(doubleMe).filter(filter3).reduce(summer,0));
+  console.log(arr.map(doubleMe)
+                 .filter(filter3)
+                 .reduce(summer,0));
 }
 
 getApiData(1000).then(doItAll);
