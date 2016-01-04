@@ -19,9 +19,15 @@ var summer = function(sum, curr) {
 
 
 var doItAll = function(arr) {
-  console.log(arr.map(doubleMe)
+  return arr.map(doubleMe)
                  .filter(filter3)
-                 .reduce(summer,0));
+                 .reduce(summer,0);
 }
 
-getApiData(1000).then(doItAll);
+var logger = function(data) {
+  console.log(data);
+}
+
+
+//Data in (API, user event) -> Pure functions transform -> Output on screen
+getApiData(1000).then(doItAll).then(logger);
