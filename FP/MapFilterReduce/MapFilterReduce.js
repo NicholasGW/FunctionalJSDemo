@@ -1,5 +1,5 @@
 /*---------------------------------------------------------
- * Multiply a value by 2, filter all objects with value < 6, reduce into a list of values, then reverse it.
+ * Multiply ab object value by 2, filter all objects with value < 6, reduce into a list of values, then reverse it.
  *---------------------------------------------------------*/
 
  var createItem = function(value) {
@@ -17,10 +17,10 @@ var newItems = [];
 
 items.forEach(function(item) {
 
-  var mult = item.value * 2;
+  var mult = createItem(item.value * 2);
 
-  if(mult < 6) {
-    newItems.push(mult);
+  if(mult.value < 6) {
+    newItems.push(mult.value);
   }
 });
 
@@ -40,12 +40,12 @@ console.log(newItems);
                   createItem(3)
                 ];
 
- var finishedItems = mfrItems.reduce(function(prev, item) {
-   return prev.concat([item.value])
- },[]).map(function(value) {
-   return value * 2;
- }).filter(function(value) {
-   return value < 6;
- }).reverse();
+var finishedItems = mfrItems.map(function(item) {
+   return createItem(item.value * 2);
+}).filter(function(item) {
+  return item.value < 6;
+}).reduce(function(prev, item) {
+  return prev.concat([item.value]);
+}, []).reverse();
 
  console.log(finishedItems);

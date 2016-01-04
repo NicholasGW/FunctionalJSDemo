@@ -1,19 +1,19 @@
-var multiply = function(x, mult) {
-  return x * mult;
+var multiply = function(x, multiplier) {
+  return x * multiplier;
 }
 
 
 console.log(multiply(2,3));
 
 
-var createMultiplier = function(mult) {
+var createMultiplier = function(multiplier) {
 
   return function(x) {
-    return x * mult;
+    return x * multiplier;
   }
 }
 
 
-var mult3 = createMultiplier(3);
+var multiplyBy3 = createMultiplier(3);
 
-console.log(mult3(2));
+console.log(multiplyBy3(2));

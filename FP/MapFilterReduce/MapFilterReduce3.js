@@ -1,28 +1,37 @@
 /*---------------------------------------------------------
- * Combine values, Multiply value by 2, filter all objects with value < 8, then reverse it.
+ * Combine values into single property,
+ * extract values,
+ * multiply values by 2,
+ * filter all values < 8,
+ * then reverse them.
  *---------------------------------------------------------*/
  Array.prototype.logger = function() {
    console.log(this);
    return this;
- }
+ };
 
  var createItem = function(value,value2) {
    return { value: value, value2: value2 };
  };
 
- var extractValue = function(item) {
-   return item.value + item.value2;
- }
+ var combineValues = function(item) {
+   return {singleValue : item.value + item.value2 };
+ };
+
+var extractValue = function(item) {
+  return item.singleValue;
+};
 
  var doubleMe = function(value) {
    return value * 2;
- }
+ };
 
 var filterPush = function(value, arr) {
   if (value < 8) {
     arr.push(value);
   }
-}
+};
+
  var items = [ createItem(2,2),
                createItem(4,4),
                createItem(6,6),
@@ -30,19 +39,19 @@ var filterPush = function(value, arr) {
                createItem(2,1)
              ];
 
-var outside = [];
+var newList = [];
 
-var app = function(old, newArr) {
+var app = function(oldArr, newArr) {
 
-  old.forEach(function(item) {
-    filterPush(doubleMe(extractValue(item)), newArr);
+  oldArr.forEach(function(item) {
+    filterPush(doubleMe(extractValue(combineValues(item))), newArr);
   });
   newArr.reverse();
-}
+};
 
-app(items, outside)
+app(items, newList);
 
-console.log(outside);
+console.log(newList);
 
 /*---------------------------------------------------------
  * Map, Filter, Reduce
@@ -57,25 +66,25 @@ console.log(outside);
              ];
 
 
+var combineVal = function(item) {
+  return { singleValue: item.value + item.value2 }
+}
+
  var extractVal = function(item) {
-   return { value: item.value + item.value2};
+   return item.singleValue;
  };
 
- var doubleVal = function(item) {
-   return {value: item.value * 2};
- };
-
- var ValToArray = function(prev, curr) {
-   return prev.concat([curr.value]);
+ var doubleVal = function(value) {
+   return value * 2
  };
 
  var filter8 = function(value) {
    return value < 8;
  };
 
- var finished = mfrItems.map(extractVal)
+ var finished = mfrItems.map(combineVal)
+                        .map(extractVal)
                         .map(doubleVal)
-                        .reduce(ValToArray, [])
                         .filter(filter8)
                         .reverse();
 

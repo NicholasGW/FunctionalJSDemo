@@ -22,7 +22,18 @@ list.forEach(function(item, index) {
 
 console.log(list);
 
+/*---------------------------------------------------------
+ * Maintain Purity?
+ *---------------------------------------------------------*/
 
+ list = [1,2,3];
+ var newList = []
+ list.forEach(function(item, index) {
+   newList[index] = item * 2;
+ });
+
+ console.log(newList);
+ console.log(list);
 /*---------------------------------------------------------
  * Use map
  *---------------------------------------------------------*/
@@ -33,5 +44,6 @@ var newList = list.map(function(item) {
   return item * 2;
 });
 
-console.log(list);
+
 console.log(newList);
+console.log(list);
