@@ -1,65 +1,55 @@
 /*---------------------------------------------------------
  * Sort list into need and remove by values
  *---------------------------------------------------------*/
-var createItem = function(type, value) {
-  return { type: type,
-           value: value
-         };
-}
 
-var items = [ createItem('need', 2),
-              createItem('remove', 0),
-              createItem('remove', 2),
-              createItem('need', 5)
-            ];
+var items = [ 2, 12, 3, 5, 4, 2, 1, 5, 4, 15 ];
 
-var sorted = { 'need': [],
-               'remove': []
+
+var sorted = { 'above': [],
+               'equalOrBelow': []
              };
+
+var predicate = 6;
 
 items.forEach(function(item) {
 
- sorted[item.type].push(item.value);
+if (item > predicate) {
+  sorted.above.push(item);
+} else {
+  sorted.equalOrBelow.push(item);
+}
 
 });
 
-console.log(sorted.remove);
-console.log(sorted.need);
+console.log(sorted.above);
+console.log(sorted.equalOrBelow);
 
 
-//Object.assign Demo
-
-var obj1 = { prop1: "test"};
-var obj2 = { prop2: "test2"};
-var obj3 = { prop1: "test3"};
-
-console.log(Object.assign({}, obj1, obj2));
-console.log(Object.assign({}, obj1, obj2, obj3))
 
 /*---------------------------------------------------------
  * Now with reduce
  *---------------------------------------------------------*/
 
- var reduceItems = [ createItem('need', 2),
-                     createItem('remove', 0),
-                     createItem('remove', 2),
-                     createItem('need', 5)
-                   ];
-
-var sortedByReduce = reduceItems.reduce(function(prev, item) {
+var reduceItems = [ 2, 12, 3, 5, 4, 2, 1, 5, 4, 15 ];
 
 
-    /* var mergeIn = {};
-     * var addedVal = prev[item.type].concat[item.value]
-     * mergeIn[item.type] = addedVal */
+var splitByPredicate = function (arr, predicate) {
 
-    var mergeIn = {[item.type]: prev[item.type].concat([item.value])};
-    var merged = Object.assign({}, prev, mergeIn)
+    return arr.reduce(function(prev, curr) {
+      var appended;
+      if (curr > predicate) {
+         appended = prev.above.concat([curr]);
+        return Object.assign({}, prev, {"above": appended});
+      } else {
+        appended = prev.equalOrBelow.concat([curr]);
+        return Object.assign({}, prev, {"equalOrBelow": appended});
+      }
+    }, {"above": [], "equalOrBelow": []});
+};
 
-    return merged;
+var sortedByReduce = splitByPredicate(reduceItems, 7);
 
 
-}, { need: [], remove: [] });
 
-console.log(sortedByReduce.need);
-console.log(sortedByReduce.remove);
+console.log(sortedByReduce.above);
+console.log(sortedByReduce.equalOrBelow);

@@ -1,9 +1,8 @@
-//Bad - relies on Global State
 var time = Date.now();
 
 var bad = function(toAdd) {
   return time + toAdd;
-}
+};
 
 
 
@@ -12,25 +11,24 @@ var bad = function(toAdd) {
 
 
 
-//Impure
+
 var alsoBad = function(toAdd) {
 
   var time = Date.now();
   return time + toAdd;
 
-}
+};
 
 
 
 
 
-//Evil! (Side Effects)
 var evil = function(val) {
 
   localStorage.myVal = val;
   return val * 2;
 
-}
+};
 
 
 
@@ -43,9 +41,9 @@ var evil = function(val) {
 var better = function(toAdd) {
 
    var time = 1;
-   return time + toAdd
+   return time + toAdd;
 
-}
+};
 
 
 
@@ -54,4 +52,4 @@ var better = function(toAdd) {
 //has an "honest" API
 var best = function(time, toAdd) {
   return time + toAdd;
-}
+};

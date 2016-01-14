@@ -10,6 +10,6 @@ for (var j=0; j < 4; j++) {
 console.log('Non destructive');
 
 for ( var i = 0; i < 4 ; i++) {
-  console.log(slicer.slice(0, 1));
+  console.log(slicer.slice(i, i+1));
   console.log(slicer);
 }
