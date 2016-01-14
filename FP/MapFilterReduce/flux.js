@@ -1,7 +1,7 @@
 //Flux + React
 
 //Impure
-var Action = function() {
+var ActionStore = function() {
 
   return ["Hi", "User Data!"];
 
